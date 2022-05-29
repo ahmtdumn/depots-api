@@ -24,14 +24,14 @@ public class StockController {
         return stockService.findAll();
     }
 
-    @GetMapping("/depot/{id}") //api/stock/depot/{id}
-    public List<StockListDTO> findByDepotId(@PathVariable Long id) {
-        return stockService.findByDepotId(id);
+    @GetMapping("/depot/{depotId}") //api/stock/depot/{id}
+    public List<StockListDTO> findByDepotId(@PathVariable Long depotId) {
+        return stockService.findByDepotId(depotId);
     }
 
-    @GetMapping("/product/{id}") //api/stock/product/{id}
-    public List<StockListDTO> findByProductId(@PathVariable Long id) {
-        return stockService.findByProductId(id);
+    @GetMapping("/product/{productId}") //api/stock/product/{id}
+    public List<StockListDTO> findByProductId(@PathVariable Long productId) {
+        return stockService.findByProductId(productId);
     }
 
     @PostMapping //api/stock
@@ -44,10 +44,11 @@ public class StockController {
         return new ResponseEntity<>(stockService.transferStock(id, stockTransferDTO), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}") //api/stock/{id}
-    public ResponseEntity<?> updateStock(@PathVariable Long id, @RequestBody @Valid StockDTO stockDTO) {
-        return new ResponseEntity<>(stockService.updateStock(id, stockDTO), HttpStatus.OK);
-    }
+    //Stock update metodu kapatıldı.
+//    @PutMapping("/{id}") //api/stock/{id}
+//    public ResponseEntity<?> updateStock(@PathVariable Long id, @RequestBody @Valid StockDTO stockDTO) {
+//        return new ResponseEntity<>(stockService.updateStock(id, stockDTO), HttpStatus.OK);
+//    }
 
     @DeleteMapping("/{id}") //api/stock/{id}
     public ResponseEntity<?> deleteStock(@PathVariable Long id) {

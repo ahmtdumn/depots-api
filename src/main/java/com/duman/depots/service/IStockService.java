@@ -20,8 +20,8 @@ public interface IStockService {
     @Transactional
     StockDTO saveStock(StockDTO stockDTO);
 
-    @Transactional
-    StockDTO updateStock(Long id, StockDTO stockDTO);
+//    @Transactional
+//    StockDTO updateStock(Long id, StockDTO stockDTO);
 
     @Transactional
     StockDTO transferStock(Long id, StockTransferDTO stockTransferDTO);

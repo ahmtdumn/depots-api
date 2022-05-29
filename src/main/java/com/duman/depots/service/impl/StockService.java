@@ -51,7 +51,7 @@ public class StockService implements IStockService {
 
     @Override
     public List<StockListDTO> findByProductId(Long productId) {
-        List<StockListDTO> stockListDTOList = stockCustomRepository.findByDepotId(productId);
+        List<StockListDTO> stockListDTOList = stockCustomRepository.findByProductId(productId);
         return stockListDTOList;    }
 
     @Override
@@ -83,20 +83,20 @@ public class StockService implements IStockService {
         return stockMapper.toDTO(stock);
     }
 
-    @Override
-    @Transactional
-    public StockDTO updateStock(Long id, StockDTO stockDTO) {
-        Stock stock = stockRepository.findById(id).orElseThrow(() ->
-                new GenericException(ErrorCode.ENTITY_NOT_FOUND_EXCEPTION, id, Stock.class.getSimpleName()));
-        stock.setDepot(depotRepository.findById(stockDTO.getDepotId()).orElseThrow(() ->
-                new GenericException(ErrorCode.ENTITY_NOT_FOUND_EXCEPTION, stockDTO.getDepotId(), Depot.class.getSimpleName())));
-        stock.setProduct(productRepository.findById(stockDTO.getProductId()).orElseThrow(() ->
-                new GenericException(ErrorCode.ENTITY_NOT_FOUND_EXCEPTION, stockDTO.getProductId(), Product.class.getSimpleName())));
-        if (stock.getDepot().getDepotType() != DepotType.MAIN_DEPOT) {
-            throw new GenericException(ErrorCode.STOCK_DEPOT_EXCEPTION);
-        }
-        return stockMapper.toDTO(stockRepository.save(stock));
-    }
+//    @Override
+//    @Transactional
+//    public StockDTO updateStock(Long id, StockDTO stockDTO) {
+//        Stock stock = stockRepository.findById(id).orElseThrow(() ->
+//                new GenericException(ErrorCode.ENTITY_NOT_FOUND_EXCEPTION, id, Stock.class.getSimpleName()));
+//        stock.setDepot(depotRepository.findById(stockDTO.getDepotId()).orElseThrow(() ->
+//                new GenericException(ErrorCode.ENTITY_NOT_FOUND_EXCEPTION, stockDTO.getDepotId(), Depot.class.getSimpleName())));
+//        stock.setProduct(productRepository.findById(stockDTO.getProductId()).orElseThrow(() ->
+//                new GenericException(ErrorCode.ENTITY_NOT_FOUND_EXCEPTION, stockDTO.getProductId(), Product.class.getSimpleName())));
+//        if (stock.getDepot().getDepotType() != DepotType.MAIN_DEPOT) {
+//            throw new GenericException(ErrorCode.STOCK_DEPOT_EXCEPTION);
+//        }
+//        return stockMapper.toDTO(stockRepository.save(stock));
+//    }
 
     @Override
     @Transactional
